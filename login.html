@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -31,15 +31,18 @@
         <form class="bground" id="loginForm">
           <div class="mb-3">
             <label class="form-label">Username</label>
-            <input type="text" class="form-control" name="username" required/>
+            <input type="text" class="form-control" name="username" required />
           </div>
           <div class="mb-3">
             <label class="form-label">Password</label>
-            <input type="password" class="form-control" name="password" required/>
+            <input
+              type="password"
+              class="form-control"
+              name="password"
+              required
+            />
           </div>
-          <button type="submit" class="btn btn-success" >
-            Login
-          </button>
+          <button type="submit" class="btn btn-success">Login</button>
         </form>
         <div class="text-center mt-3">
           Don't have an account?
@@ -62,10 +65,13 @@
           password: loginForm.password.value.trim(),
         };
 
-        let users = JSON.parse(localStorage.getItem("users")) || []
+        let users = JSON.parse(localStorage.getItem("users")) || [];
         for (let i = 0; i < users.length; i++) {
-          if (users[i].username == user.username && users[i].password === user.password) {
-            document.location.href = "Roblox.html"
+          if (
+            users[i].username == user.username &&
+            users[i].password === user.password
+          ) {
+            document.location.href = "index.html";
             return;
           }
         }
