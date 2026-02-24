@@ -40,6 +40,31 @@
       .card {
         margin-bottom: 20px;
       }
+      .container {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+
+      .loader {
+        border: 8px solid #f3f3f3; /* Light grey */
+        border-top: 8px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        animation: spin 1s linear infinite;
+        margin: auto;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      
 
       .card-text {
         display: -webkit-box;
@@ -170,6 +195,7 @@
     </div>
     <div class="container text-center">
       <div class="row" id="game-container">
+        <div class="loader"></div>
         <!-- Game cards will be inserted here -->
       </div>
     </div>
@@ -184,28 +210,31 @@
   ></script>
   <script>
     function loadData() {
-      fetch(
-        "https://api.rawg.io/api/games?key=b4a096faf19234a33ac9ec9d7c81d3df8",
-      )
+      fetch("https://www.cheapshark.com/api/1.0/deals")
         .then((res) => res.json())
         .then((data) => {
           const gameContainer = document.getElementById("game-container");
-          data.results.forEach((game) => {
+          gameContainer.innerHTML = "";
+
+          data.forEach((game) => {
             const htmlContent = `
               <div class="col-12 col-xs-6 col-sm-4 col-md-3 col-lg-2">
                 <div class="card">
                   <img
-                    src="${game.background_image}"
+                    src="${game.thumb}"
                     class="card-img-top"
-                    alt="${game.name || "Game"}"
+                    alt="${game.title || "Game"}"
                   />
                   <div class="card-body">
                     <p class="card-text">
-                      ${game.name} - ${game.released}
+                      ${game.title}
+                    </p>
+                    <p class="card-text">
+                      Price: ${game.normalPrice}$
                     </p>
                   </div>
                   <div class="d-flex justify-content-evenly mb-3">
-                    <span>👍${game.rating}</span><span>🫂${game.reviews_count}</span>
+                    <span>👍${game.savings}</span><span>🫂${game.dealRating}</span>
                   </div>
                 </div>
               </div>

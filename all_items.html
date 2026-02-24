@@ -22,68 +22,40 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
+      footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        width: 100%;
+      }
+
+      .container {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+
+      .loader {
+        border: 8px solid #f3f3f3; /* Light grey */
+        border-top: 8px solid #3498db; /* Blue */
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        animation: spin 1s linear infinite;
+        margin: auto;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
     </style>
   </head>
   <body>
-    <!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Roblox</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-              <a class="nav-link active" aria-current="page" href="login.html"
-                >Log out</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Charts</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Marketplace
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="all_items.html">All items</a></li>
-                <li><a class="dropdown-item" href="#">Trade</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Buy</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
-        </div>
-      </div>
-    </nav> -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <a class="navbar-brand" href="index.html">Roblox</a>
@@ -160,7 +132,7 @@
     </nav>
 
     <div class="container text-center">
-      <div class="row" id="item-container"></div>
+      <div class="row" id="item-container"><div class="loader"></div></div>
     </div>
 
     <footer>
@@ -178,6 +150,7 @@
           .then((res) => res.json())
           .then((res) => {
             const itemContainer = document.getElementById("item-container");
+            itemContainer.innerHTML = "";
             const first100 = res.data.slice(0, 100);
             first100.forEach((item) => {
               const htmlContent = `
